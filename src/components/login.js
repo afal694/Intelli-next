@@ -5,12 +5,12 @@ import {
 } from 'reactstrap';
 import { LocalForm, Control } from 'react-redux-form';
 
-import  Formu  from "./formu";
+import Formu from "./formu";
 
 
 class Login extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
   }
 
@@ -21,7 +21,9 @@ class Login extends React.Component {
     return (
       <Container>
         <div className="d-flex justify-content-center">
-          <Formu email={this.props.email} password={this.props.password} addLogin={this.props.addLogin}/>
+          <Formu email={this.props.email} password={this.props.password} addLogin={this.props.addLogin}
+            fetchModules={this.props.fetchModules}
+          />
         </div>
       </Container>
     );

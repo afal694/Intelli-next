@@ -14,17 +14,14 @@ class Formu extends React.Component {
   }
 
   handleSubmit(values) {
-    alert("Current values is: " + JSON.stringify(values));
     this.props.addLogin(values.email, values.password);
-    console.log("estado @" + this.props.email + " " + this.props.password);
+    this.props.fetchModules(values.email, values.password);
   }
 
   componentDidMount() {
   }
 
   render() {
-
-
     return (
       <LocalForm
         onSubmit={(values) => this.handleSubmit(values)}

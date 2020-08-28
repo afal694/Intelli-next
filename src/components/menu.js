@@ -30,7 +30,7 @@ class Menu extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchModules();
+    console.log("modules: "+this,this.props.modules);
   }
 
   render() {

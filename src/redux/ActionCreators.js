@@ -5,12 +5,12 @@ export const addLogin = (email, password) => ({
   payload: { email, password }
 });
 
-export const fetchModules = () => (dispatch) => {
+export const fetchModules = (email, password) => (dispatch) => {
 
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: "em@intelli-next.com", password: 12345 })
+    body: JSON.stringify({ email: email, password: password })
   };
   fetch('https://api.myintelli.net/v1/login', requestOptions)
     .then(response => response.json())

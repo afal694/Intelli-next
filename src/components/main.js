@@ -1,8 +1,23 @@
 import React from 'react';
+
+import { connect } from 'react-redux'
+
 import {
   Button, Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Container, Row, Col
 } from 'reactstrap';
+
+import { Login } from "../redux/ActionCreators";
+
+
+const mapStateToProps = state => {
+  return {Login: state.Login};
+};
+
+const mapDispatchToProps = dispatch => ({
+  postLogin: (email, password) => dispatch(Login(email, password))
+});
+
 
 
 function LeftPanel({ modules }) {
@@ -21,8 +36,7 @@ function LeftPanel({ modules }) {
     <div>{renderModules}</div>
   );
 }
-
-class Main extends React.Component {
+ class Main extends React.Component {
 
   constructor(props) {
     super(props);
@@ -61,4 +75,6 @@ class Main extends React.Component {
   }
 }
 
+
+//export default connect(null, mapDispatchToProps)(Main);
 export default Main;

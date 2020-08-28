@@ -1,2 +1,2 @@
  
-export const ADD_MODULES = 'ADD_MODULES';
+export const LOGIN = 'LOGIN';

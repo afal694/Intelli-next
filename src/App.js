@@ -1,13 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 import { Button } from 'reactstrap';
 import Main from './components/main';
 import Login from './components/login';
+import { Provider } from 'react-redux'
+import { ConfigureStore } from './redux/configureStore';
+
+const store = ConfigureStore();
 
 function App() {
   return (
-      <Login />
+    <Provider store={store}>
+        <Login />
+    </Provider>
   );
 }
 

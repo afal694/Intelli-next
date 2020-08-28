@@ -5,53 +5,42 @@ import {
 } from 'reactstrap';
 import { LocalForm, Control } from 'react-redux-form';
 
+import  Formu  from "./formu";
+import { connect } from 'react-redux';
+import { addLogin } from '../redux/ActionCreators';
 
-class Formu extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(values) {
-    alert("Current values is: " + JSON.stringify(values));
-  }
-
-  render() {
-
-
-    return (
-      <LocalForm
-        onSubmit={(values) => this.handleSubmit(values)}
-      >
-        <FormGroup>
-          <Label htmlFor="email" md={2}>Email</Label>
-          <Control.text model=".email" id="email" name="email" className="form-control" placeholder="Email" />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="password" md={2}>Password</Label>
-          <Control.password model=".password" id="password" name="password" className="form-control" placeholder="Password" />
-        </FormGroup>
-        <Row className="form-group">
-          <Col className="align-items-center">
-            <Button type="submit" color="success">
-              Login
-                </Button>
-          </Col>
-        </Row>
-      </LocalForm>
-
-    );
+const mapStateToProps = state => {
+  return {
+    email: state.email
   }
 }
 
+// const mapDispatchToProps = dispatch => ({
+//   addlogin: () => dispatch(addLogin()),
+// });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    // dispatching plain actions
+    addLogin: () => dispatch(addLogin())
+  }
+}
 class Login extends React.Component {
+
+  constructor(props){
+    super(props)
+  }
+
+  componentDidMount() {
+    console.log('se muestra estado: '+this.props.email);
+    //this.props.addLogin();
+  }
 
   render() {
     return (
-      <Container >
+      <Container>
         <div className="d-flex justify-content-center">
-          <Formu />
+          <Formu email={this.props.email} addLogin={this.props.addLogin}/>
         </div>
       </Container>
     );
@@ -59,4 +48,5 @@ class Login extends React.Component {
 
 }
 
-export default Login;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -1,2 +1,1 @@
- 
-export const ADD_MODULES = 'ADD_MODULES';
+export const ADD_LOGIN = 'ADD_LOGIN';

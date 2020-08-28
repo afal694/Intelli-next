@@ -6,22 +6,8 @@ import {
 import { LocalForm, Control } from 'react-redux-form';
 
 import  Formu  from "./formu";
-import { connect } from 'react-redux';
-import { addLogin } from '../redux/ActionCreators';
 
-const mapStateToProps = state => {
-  return {
-    email: state.email,
-    password: state.password
-  }
-}
 
-const mapDispatchToProps = dispatch => {
-  return {
-    // dispatching plain actions
-    addLogin: (email, password) => dispatch(addLogin(email, password))
-  }
-}
 class Login extends React.Component {
 
   constructor(props){
@@ -44,4 +30,4 @@ class Login extends React.Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

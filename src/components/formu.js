@@ -16,10 +16,10 @@ class Formu extends React.Component {
   handleSubmit(values) {
     alert("Current values is: " + JSON.stringify(values));
     this.props.addLogin(values.email, values.password);
-    console.log("estado @"+this.props.email+" "+this.props.password);
+    console.log("estado @" + this.props.email + " " + this.props.password);
   }
 
-  componentDidMount(){
+  componentDidMount() {
   }
 
   render() {

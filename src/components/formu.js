@@ -15,18 +15,18 @@ class Formu extends React.Component {
 
   handleSubmit(values) {
     alert("Current values is: " + JSON.stringify(values));
+    this.props.addLogin(values.email, values.password);
+    console.log("estado @"+this.props.email+" "+this.props.password);
   }
 
   componentDidMount(){
-    console.log('llega a login: '+this.props.email);
-    this.props.addLogin();
   }
 
   render() {
 
 
     return (
-      <Form
+      <LocalForm
         onSubmit={(values) => this.handleSubmit(values)}
       >
         <FormGroup>
@@ -44,7 +44,7 @@ class Formu extends React.Component {
                   </Button>
           </Col>
         </Row>
-      </Form>
+      </LocalForm>
 
     );
   }

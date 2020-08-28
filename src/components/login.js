@@ -11,18 +11,15 @@ import { addLogin } from '../redux/ActionCreators';
 
 const mapStateToProps = state => {
   return {
-    email: state.email
+    email: state.email,
+    password: state.password
   }
 }
-
-// const mapDispatchToProps = dispatch => ({
-//   addlogin: () => dispatch(addLogin()),
-// });
 
 const mapDispatchToProps = dispatch => {
   return {
     // dispatching plain actions
-    addLogin: () => dispatch(addLogin())
+    addLogin: (email, password) => dispatch(addLogin(email, password))
   }
 }
 class Login extends React.Component {
@@ -32,15 +29,13 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    console.log('se muestra estado: '+this.props.email);
-    //this.props.addLogin();
   }
 
   render() {
     return (
       <Container>
         <div className="d-flex justify-content-center">
-          <Formu email={this.props.email} addLogin={this.props.addLogin}/>
+          <Formu email={this.props.email} password={this.props.password} addLogin={this.props.addLogin}/>
         </div>
       </Container>
     );

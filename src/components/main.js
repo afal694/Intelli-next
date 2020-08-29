@@ -40,6 +40,8 @@ class Main extends React.Component {
         /></Route>
         <Route path="/menu" ><Menu
           modules={this.props.Modules.modules}
+          isLoading={this.props.Modules.isLoading}
+          errMess={this.props.Modules.errMess}
         /></Route>
         <Redirect to="/login" />
       </Switch>

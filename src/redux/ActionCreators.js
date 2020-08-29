@@ -34,7 +34,7 @@ export const fetchModules = (email, password) => (dispatch) => {
       })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      //console.log(data);
       dispatch(addModules(data.modules));
     })
     .catch(error => dispatch(modulesFailed(error.message)))

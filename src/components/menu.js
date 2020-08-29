@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Card,  CardBody,
+  Card, CardBody,
   CardTitle, CardSubtitle
 } from 'reactstrap';
 
-function LeftPanel({ modules }) {
+function LeftPanel({ modules, isLoading, errMess }) {
 
   const renderModules = modules.map((modules) => {
     return (
@@ -16,11 +16,28 @@ function LeftPanel({ modules }) {
       </Card>
     );
   });
-  return (
-    <div>
-    {renderModules}
-    </div>
-  );
+
+  if (isLoading) {
+    return (<div className="container">
+      <div className="row">
+        <p>Loading...</p>
+      </div>
+    </div>);
+  } else if (errMess) {
+    return (<div className="container">
+      <div className="row">
+        <h4>{errMess}</h4>
+      </div>
+    </div>);
+  } else if (modules[0] != null) {
+    return (
+      <div>
+        {renderModules}
+      </div>
+    );
+  } else {
+    return (<div></div>);
+  }
 }
 
 class Menu extends React.Component {
@@ -29,13 +46,15 @@ class Menu extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    console.log("modules: "+this,this.props.modules);
-  }
+  componentDidMount() { }
 
   render() {
     return (
-      <LeftPanel modules={this.props.modules} />
+      <LeftPanel
+        modules={this.props.modules}
+        isLoading={this.props.isLoading}
+        errMess={this.props.errMess}
+      />
     );
   }
 

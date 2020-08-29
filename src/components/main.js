@@ -38,7 +38,7 @@ class Main extends React.Component {
           addLogin={this.props.addLogin}
           fetchModules={this.props.fetchModules}
         /></Route>
-        <Route path="/menu" ><Menu
+        <Route path="/menu"><Menu
           modules={this.props.Modules.modules}
           isLoading={this.props.Modules.isLoading}
           errMess={this.props.Modules.errMess}

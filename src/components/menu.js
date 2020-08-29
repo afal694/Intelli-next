@@ -1,19 +1,24 @@
 import React from 'react';
 import {
   Card, CardBody,
-  CardTitle, CardSubtitle
+  CardTitle, CardSubtitle, Row
 } from 'reactstrap';
 
 function LeftPanel({ modules, isLoading, errMess }) {
 
   const renderModules = modules.map((modules) => {
     return (
-      <Card key={modules.id_module}>
-        <CardBody>
-          <CardTitle>Module: {modules.module}</CardTitle>
-          <CardSubtitle>path: {modules.path}</CardSubtitle>
-        </CardBody>
-      </Card>
+      <div className="cardModule" key={modules.id_module}>
+        <Card className="border-primary">
+          <div className="card-header text-primary">{modules.module} <div className="badge badge-info"> {modules.id_module} </div></div>
+          <CardBody>
+            <CardTitle></CardTitle>
+            <CardSubtitle className="text-info"> path: {modules.path}</CardSubtitle>
+          </CardBody>
+          <div className="card-footer">
+          </div>
+        </Card>
+      </div>
     );
   });
 
@@ -31,7 +36,7 @@ function LeftPanel({ modules, isLoading, errMess }) {
     </div>);
   } else if (modules[0] != null) {
     return (
-      <div>
+      <div className="containerModules">
         {renderModules}
       </div>
     );

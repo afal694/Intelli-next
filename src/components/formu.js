@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  Button, Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Container, Row, Col, FormGroup, Label, Input, Form
+  Button, Row, Col, FormGroup, Label
 } from 'reactstrap';
 import { LocalForm, Control } from 'react-redux-form';
+import { withRouter } from 'react-router-dom';
 
 class Formu extends React.Component {
 
@@ -16,6 +16,7 @@ class Formu extends React.Component {
   handleSubmit(values) {
     this.props.addLogin(values.email, values.password);
     this.props.fetchModules(values.email, values.password);
+    this.props.history.push('/menu');
   }
 
   componentDidMount() {
@@ -47,4 +48,4 @@ class Formu extends React.Component {
   }
 }
 
-export default Formu;
+export default  withRouter(Formu);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { addLogin, fetchModules } from '../redux/ActionCreators';
 
 
@@ -11,14 +11,14 @@ const mapStateToProps = state => {
   return {
     email: state.email,
     password: state.password,
-    modules: []
+    Modules: state.Modules
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addLogin: (email, password) => dispatch(addLogin(email, password)),
-    fetchModules: (email, password) => dispatch(fetchModules(email, password))
+    fetchModules: (email, password) => dispatch(fetchModules(email, password)),
   }
 }
 
@@ -34,11 +34,13 @@ class Main extends React.Component {
     return (
       <Switch>
         <Route path="/login" ><Login email={this.props.email}
-          password={this.props.password} 
-          addLogin={this.props.addLogin} 
+          password={this.props.password}
+          addLogin={this.props.addLogin}
           fetchModules={this.props.fetchModules}
-          /></Route>
-        <Route path="/menu" ><Menu modules={this.props.modules} /></Route>
+        /></Route>
+        <Route path="/menu" ><Menu
+          modules={this.props.Modules.modules}
+        /></Route>
         <Redirect to="/login" />
       </Switch>
     );
@@ -46,4 +48,4 @@ class Main extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

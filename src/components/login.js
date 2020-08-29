@@ -1,9 +1,6 @@
 import React from 'react';
-import {
-  Button, Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Container, Row, Col, FormGroup, Label, Input, Form
+import {Container
 } from 'reactstrap';
-import { LocalForm, Control } from 'react-redux-form';
 
 import Formu from "./formu";
 

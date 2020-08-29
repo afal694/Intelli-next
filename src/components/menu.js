@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  Button, Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Container, Row, Col
+  Card,  CardBody,
+  CardTitle, CardSubtitle
 } from 'reactstrap';
 
 function LeftPanel({ modules }) {

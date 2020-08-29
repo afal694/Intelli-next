@@ -65,3 +65,10 @@
 .cardModule {
     padding: 10px;
 }
+
+.devices-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end;
+}

@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <Provider store={store}>
-        <div className="container">
+        <div className="container-fluid welcomeBg">
           <Main />
         </div>
       </Provider>

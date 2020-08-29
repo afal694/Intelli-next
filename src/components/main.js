@@ -45,8 +45,8 @@ class Main extends React.Component {
         /></Route>
         <Redirect to="/login" />
       </Switch>
-    );
 
+    );
   }
 }
 

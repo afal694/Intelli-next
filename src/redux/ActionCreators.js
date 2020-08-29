@@ -36,6 +36,7 @@ export const fetchModules = (email, password) => (dispatch) => {
     .then(data => {
       //console.log(data);
       dispatch(addModules(data.modules));
+      dispatch(addToken(data.token));
     })
     .catch(error => dispatch(modulesFailed(error.message)))
 }
@@ -52,4 +53,9 @@ export const modulesLoading = () => ({
 export const modulesFailed = (errMess) => ({
   type: ActionTypes.MODULES_FAILED,
   payload: errMess
+});
+
+export const addToken = (token) => ({
+  type: ActionTypes.ADD_TOKEN,
+  payload: token
 });

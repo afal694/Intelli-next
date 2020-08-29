@@ -11,14 +11,15 @@ const mapStateToProps = state => {
   return {
     email: state.email,
     password: state.password,
-    Modules: state.Modules
+    Modules: state.Modules,
+    token: state.Auth.token
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addLogin: (email, password) => dispatch(addLogin(email, password)),
-    fetchModules: (email, password) => dispatch(fetchModules(email, password)),
+    fetchModules: (email, password) => dispatch(fetchModules(email, password))
   }
 }
 
@@ -42,6 +43,7 @@ class Main extends React.Component {
           modules={this.props.Modules.modules}
           isLoading={this.props.Modules.isLoading}
           errMess={this.props.Modules.errMess}
+          token={this.props.token}
         /></Route>
         <Redirect to="/login" />
       </Switch>

@@ -34,7 +34,8 @@ class Menu extends React.Component {
     super(props);
   }
 
-  componentDidMount() { }
+  componentDidMount() { 
+  }
 
   render() {
     return (
@@ -47,7 +48,9 @@ class Menu extends React.Component {
             <Devices
               modules={this.props.modules}
               isLoading={this.props.isLoading}
-              errMess={this.props.errMess} />
+              errMess={this.props.errMess} 
+              token={this.props.token}
+              />
           </div>
         </div>
       </div>

@@ -38,15 +38,17 @@ class Menu extends React.Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-2 sidebar bg-light">
-          <LeftPanel />
-        </div>
-        <div className="col-10">
-          <Devices
-            modules={this.props.modules}
-            isLoading={this.props.isLoading}
-            errMess={this.props.errMess} />
+      <div className="">
+        <div className="row">
+          <div className="col-2 sidebar bg-light">
+            <LeftPanel />
+          </div>
+          <div className="col-10 p-0">
+            <Devices
+              modules={this.props.modules}
+              isLoading={this.props.isLoading}
+              errMess={this.props.errMess} />
+          </div>
         </div>
       </div>
     );

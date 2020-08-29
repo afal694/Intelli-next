@@ -44,17 +44,21 @@ function DevicesPanel({ modules, isLoading, errMess }) {
   });
 
   if (isLoading) {
-    return (<div className="container">
-      <div className="row">
-        <p>Loading...</p>
+    return (
+      <div className="">
+        <div className="App d-flex flex-column align-items-center justify-content-center">
+          <p>Loading...</p>
+        </div>
       </div>
-    </div>);
+    );
   } else if (errMess) {
-    return (<div className="container">
-      <div className="row">
-        <h4>{errMess}</h4>
+    return (
+      <div className="container">
+        <div className="row">
+          <h1>{errMess}</h1>
+        </div>
       </div>
-    </div>);
+    );
   } else if (modules[0] != null) {
     return (
       <div className="containerModules">
@@ -74,22 +78,15 @@ class Devices extends React.Component {
   }
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="#">Navbar</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <div className="navbar-nav devices-panel">
-              <div className="nav-item">
-                <SearchForm />
-              </div>
-              <div className="nav-item align-item-end">
-                <BtnCargar />
-              </div>
-            </div>
-          </div>
+      <div className="container-fluid p-0">
+        <nav className="navbar navbar-light bg-light">
+          <span className="navbar-brand mb-0 h1">Intelli-next</span>
+          <span className="navbar-text">
+            Navbar text with an inline element</span>
+          <form className="form-inline">
+            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Load</button>
+          </form>
         </nav>
         <DevicesPanel
           modules={this.props.modules}

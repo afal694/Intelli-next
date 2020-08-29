@@ -4,7 +4,6 @@ import './App.css';
 import Main from './components/main';
 import { Provider } from 'react-redux'
 import { ConfigureStore } from './redux/configureStore';
-import { Container } from "reactstrap";
 
 import {
   BrowserRouter as Router
@@ -16,7 +15,7 @@ function App() {
   return (
     <Router>
       <Provider store={store}>
-        <div className="container-fluid welcomeBg">
+        <div className="container-fluid p-0">
           <Main />
         </div>
       </Provider>

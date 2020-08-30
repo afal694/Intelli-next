@@ -35,7 +35,7 @@ class Menu extends React.Component {
     super(props);
   }
 
-  componentDidMount() { 
+  componentDidMount() {
   }
 
   // render() {
@@ -67,7 +67,7 @@ class Menu extends React.Component {
           </div>
           <div className="col-10 p-0">
             <ExternApi
-              fetchApi={this.props.fetchApi}    
+              Api={this.props.Api}
               collection={this.props.collection}
               />
           </div>

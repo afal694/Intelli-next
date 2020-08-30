@@ -92,7 +92,7 @@ export const fetchAPI = () => (dispatch) => {
     .then(response => response.json())
     .then(data => {
       //console.log(data);
-      dispatch(addApi(data));
+      dispatch(addApi(data.collection.items));
     })
     .catch(error => dispatch(apiFailed(error.message)))
 }

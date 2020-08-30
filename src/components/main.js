@@ -13,7 +13,8 @@ const mapStateToProps = state => {
     password: state.password,
     Modules: state.Modules,
     token: state.Auth.token,
-    collection: state.Api
+    collection: state.Api.collections,
+    Api: state.Api
   }
 }
 
@@ -32,6 +33,7 @@ class Main extends React.Component {
   }
 
   componentDidMount(){
+    this.props.fetchAPI();
   }
 
   render() {
@@ -49,7 +51,7 @@ class Main extends React.Component {
           errMess={this.props.Modules.errMess}
           token={this.props.token}
           collection={this.props.collection}
-          fetchAPI={this.props.fetchAPI}
+          Api={this.props.Api}
         /></Route>
         <Redirect to="/login" />
       </Switch>

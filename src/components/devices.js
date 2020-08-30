@@ -16,6 +16,7 @@ function DevicesPanel({ modules, isLoading, errMess }) {
             <CardSubtitle className="text-info"> path: {modules.path}</CardSubtitle>
           </CardBody>
           <div className="card-footer">
+            <p>{modules.module.operations[0]}</p>
           </div>
         </Card>
       </div>
@@ -48,6 +49,7 @@ function DevicesPanel({ modules, isLoading, errMess }) {
     return (<div></div>);
   }
 }
+
 
 class Devices extends React.Component {
   constructor(props) {

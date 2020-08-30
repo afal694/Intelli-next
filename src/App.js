@@ -1,23 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
-
-import { Provider } from 'react-redux'
-import { ConfigureStore } from './redux/configureStore'
-
-import { LoginReducer } from "./redux/login";
 import Main from './components/main';
-import Login from './components/login';
-import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import { ConfigureStore } from './redux/configureStore';
 
-const store = createStore(LoginReducer);
+import {
+  BrowserRouter as Router
+} from "react-router-dom";
 
+const store = ConfigureStore();
 
 function App() {
   return (
-    <Provider store={store}>
-      <Main />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <div className="container-fluid p-0">
+          <Main />
+        </div>
+      </Provider>
+    </Router>
   );
 }
 

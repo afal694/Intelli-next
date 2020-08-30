@@ -1,80 +1,65 @@
 import React from 'react';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { addLogin, fetchModules, fetchAPI, togglePage } from '../redux/ActionCreators';
 
-import { connect } from 'react-redux'
-
-import {
-  Button, Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Container, Row, Col
-} from 'reactstrap';
-
-import { Login } from "../redux/ActionCreators";
-
+import Login from './login';
+import Menu from "./menu";
+import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
-  return {Login: state.Login};
-};
+  return {
+    email: state.email,
+    password: state.password,
+    Modules: state.Modules,
+    token: state.Auth.token,
+    collection: state.Api.collections,
+    Api: state.Api,
+    page: state.Page.page
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-  postLogin: (email, password) => dispatch(Login(email, password))
-});
-
-
-
-function LeftPanel({ modules }) {
-
-  const renderModules = modules.map((modules) => {
-    return (
-      <Card key={modules.id_module}>
-        <CardBody>
-          <CardTitle>Module: {modules.module}</CardTitle>
-          <CardSubtitle>path: {modules.path}</CardSubtitle>
-        </CardBody>
-      </Card>
-    );
-  });
-  return (
-    <div>{renderModules}</div>
-  );
+const mapDispatchToProps = dispatch => {
+  return {
+    addLogin: (email, password) => dispatch(addLogin(email, password)),
+    fetchModules: (email, password) => dispatch(fetchModules(email, password)),
+    fetchAPI: () => dispatch(fetchAPI()),
+    togglePage: (page) => dispatch(togglePage(page))
+  }
 }
  class Main extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { modules: [] }
   }
 
-  componentDidMount() {
-    // Simple POST request with a JSON body using fetch
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: "em@intelli-next.com", password: 12345 })
-    };
-    fetch('https://api.myintelli.net/v1/login', requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        this.setState({ modules: data.modules })
-      })
+  componentDidMount(){
+    this.props.fetchAPI();
   }
 
   render() {
 
     return (
-      <Container>
-        <Row>
-          <Col md="4">
-            <div>
-              <LeftPanel modules={this.state.modules} />
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    );
+      <Switch>
+        <Route path="/login" ><Login email={this.props.email}
+          password={this.props.password}
+          addLogin={this.props.addLogin}
+          fetchModules={this.props.fetchModules}
+        /></Route>
+        <Route path="/menu"><Menu
+          modules={this.props.Modules.modules}
+          isLoading={this.props.Modules.isLoading}
+          errMess={this.props.Modules.errMess}
+          token={this.props.token}
+          collection={this.props.collection}
+          Api={this.props.Api}
+          page={this.props.page}
+          togglePage={this.togglePage}
+        /></Route>
+        <Redirect to="/login" />
+      </Switch>
 
+    );
   }
 }
 
-
-//export default connect(null, mapDispatchToProps)(Main);
-export default Main;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

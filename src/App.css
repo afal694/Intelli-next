@@ -42,7 +42,7 @@ sidebar
 }
 
 .sidebar {
-    position: relative;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -75,6 +75,18 @@ sidebar
     text-transform: uppercase;
 }
 
+.scroll-bar {
+    overflow: auto;
+    height: 100vh;
+    background-color: #333;
+    position: fixed;
+    /* Set the navbar to fixed position */
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+    /* Full width */
+}
+
 
 /* devices */
 
@@ -94,3 +106,6 @@ sidebar
     justify-content: space-around;
     align-items: flex-end;
 }
+
+
+/* Right-panel */

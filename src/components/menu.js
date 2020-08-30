@@ -145,14 +145,14 @@ class Menu extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col-3 sidebar bg-light">
+        <div className="col-3 sidebar bg-light scroll-bar">
           <LeftPanel
             modules={this.props.modules}
             isLoading={this.props.isLoading}
             errMess={this.props.errMess}
           />
         </div>
-        <div className="col-9 p-0">
+        <div className="col-9 p-0 scroll-bar">
           <SwicthPage
             token={this.props.token}
             Api={this.props.Api}

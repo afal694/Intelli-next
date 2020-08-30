@@ -65,48 +65,6 @@ function LeftPanel({ modules, isLoading, errMess }) {
 
 }
 
-function DevicesPanel({ modules, isLoading, errMess }) {
-
-  const renderModules = modules.map((modules) => {
-    return (
-      <div className="cardModule" key={modules.id_module}>
-        <Card className="border-primary">
-          <div className="card-header text-primary">{modules.module} <div className="badge badge-info"> {modules.id_module} </div></div>
-          <CardBody>
-            <CardTitle></CardTitle>
-            <CardSubtitle className="text-info"> path: {modules.path}</CardSubtitle>
-          </CardBody>
-        </Card>
-      </div>
-    );
-  });
-
-  if (isLoading) {
-    return (
-      <div className="">
-        <div className="App d-flex flex-column align-items-center justify-content-center">
-          <p>Loading...</p>
-        </div>
-      </div>
-    );
-  } else if (errMess) {
-    return (
-      <div className="container">
-        <div className="row">
-          <h1>{errMess}</h1>
-        </div>
-      </div>
-    );
-  } else if (modules[0] != null) {
-    return (
-      <div className="containerModules">
-        {renderModules}
-      </div>
-    );
-  } else {
-    return (<div></div>);
-  }
-}
 
 function SwicthPage(props) {
 
@@ -121,7 +79,11 @@ function SwicthPage(props) {
             collection={props.collection} />
         </Route>
         <Route path={`${match.path}/DEVICE`} >
-          <Devices token={props.token} />
+          <Devices token={props.token} 
+            module={props.modules[11]}
+            isLoading={props.isLoading}
+            errMess={props.errMess}
+          />
         </Route>
         <Route path={`${match.path}/api`}>
           <ExternApi
@@ -157,6 +119,9 @@ class Menu extends React.Component {
             token={this.props.token}
             Api={this.props.Api}
             collection={this.props.collection}
+            modules={this.props.modules}
+            isLoading={this.props.isLoading}
+            errMess={this.props.errMess}
           />
         </div>
        </div> 

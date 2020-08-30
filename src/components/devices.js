@@ -4,27 +4,6 @@ import {
   CardTitle, CardSubtitle, Row
 } from 'reactstrap';
 
-function SearchForm(props) {
-  return (
-    <div>
-      <Form>
-        <FormGroup>
-          <Label for="text">search</Label>
-          <Input type="text" name="text" id="search" placeholder="search field..." />
-        </FormGroup>
-      </Form>
-    </div>
-  );
-}
-
-function BtnCargar(props) {
-  return (
-    <div>
-      <Button color="info">cargar más</Button>
-    </div>
-  );
-}
-
 function DevicesPanel({ modules, isLoading, errMess }) {
 
   const renderModules = modules.map((modules) => {
@@ -69,8 +48,6 @@ function DevicesPanel({ modules, isLoading, errMess }) {
     return (<div></div>);
   }
 }
-
-//https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&media_type=image
 
 class Devices extends React.Component {
   constructor(props) {

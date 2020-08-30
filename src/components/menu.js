@@ -1,5 +1,6 @@
 import React from 'react';
 import Devices from './devices';
+import ExternApi from './externApi';
 
 function LeftPanel(props) {
   return (
@@ -37,6 +38,26 @@ class Menu extends React.Component {
   componentDidMount() { 
   }
 
+  // render() {
+  //   return (
+  //     <div className="">
+  //       <div className="row">
+  //         <div className="col-2 sidebar bg-light">
+  //           <LeftPanel />
+  //         </div>
+  //         <div className="col-10 p-0">
+  //           <Devices
+  //             modules={this.props.modules}
+  //             isLoading={this.props.isLoading}
+  //             errMess={this.props.errMess} 
+  //             token={this.props.token}
+  //             />
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
   render() {
     return (
       <div className="">
@@ -45,11 +66,9 @@ class Menu extends React.Component {
             <LeftPanel />
           </div>
           <div className="col-10 p-0">
-            <Devices
-              modules={this.props.modules}
-              isLoading={this.props.isLoading}
-              errMess={this.props.errMess} 
-              token={this.props.token}
+            <ExternApi
+              fetchApi={this.props.fetchApi}    
+              collection={this.props.collection}
               />
           </div>
         </div>

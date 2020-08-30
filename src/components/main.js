@@ -32,7 +32,6 @@ class Main extends React.Component {
   }
 
   componentDidMount(){
-    this.props.fetchAPI();
   }
 
   render() {
@@ -49,6 +48,8 @@ class Main extends React.Component {
           isLoading={this.props.Modules.isLoading}
           errMess={this.props.Modules.errMess}
           token={this.props.token}
+          collection={this.props.collection}
+          fetchAPI={this.props.fetchAPI}
         /></Route>
         <Redirect to="/login" />
       </Switch>

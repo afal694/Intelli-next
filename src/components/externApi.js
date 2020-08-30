@@ -51,8 +51,8 @@ function ApiPanel({ collection, isLoading, errMess }) {
   const renderItem = collection.map((item) => {
     return (
       <div className="cardModule" key={item.data[0].nasa_id}>
-        <Card className="border-primary">
-          <CardImg top width="5%" src={item.links[0].href} alt="Card image cap" />
+        <Card className="border-secondary">
+          <CardImg top width="100%" src={item.links[0].href} alt="Card image cap" />
           <div className="card-header text-primary">{item.data[0].title}<div className="badge badge-info"></div></div>
           <CardBody>
             <CardTitle></CardTitle>

@@ -9,3 +9,5 @@ export const ADD_TOKEN = 'ADD_TOKEN';
 export const ADD_API = 'ADD_API';
 export const API_LOADING = 'API_LOADING';
 export const API_FAILED = 'API_FAILED';
+
+export const TOGGLE_PAGE = 'TOGGLE_PAGE';

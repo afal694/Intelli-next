@@ -1,55 +1,4 @@
 import React from 'react';
-import {
-  Form, FormGroup, Label, Input, Button, Card, CardBody,
-  CardTitle, CardSubtitle, Row
-} from 'reactstrap';
-
-function DevicesPanel({ modules, isLoading, errMess }) {
-
-  const renderModules = modules.map((modules) => {
-    return (
-      <div className="cardModule" key={modules.id_module}>
-        <Card className="border-primary">
-          <div className="card-header text-primary">{modules.module} <div className="badge badge-info"> {modules.id_module} </div></div>
-          <CardBody>
-            <CardTitle></CardTitle>
-            <CardSubtitle className="text-info"> path: {modules.path}</CardSubtitle>
-          </CardBody>
-          <div className="card-footer">
-            <p>{modules.module.operations[0]}</p>
-          </div>
-        </Card>
-      </div>
-    );
-  });
-
-  if (isLoading) {
-    return (
-      <div className="">
-        <div className="App d-flex flex-column align-items-center justify-content-center">
-          <p>Loading...</p>
-        </div>
-      </div>
-    );
-  } else if (errMess) {
-    return (
-      <div className="container">
-        <div className="row">
-          <h1>{errMess}</h1>
-        </div>
-      </div>
-    );
-  } else if (modules[0] != null) {
-    return (
-      <div className="containerModules">
-        {renderModules}
-      </div>
-    );
-  } else {
-    return (<div></div>);
-  }
-}
-
 
 class Devices extends React.Component {
   constructor(props) {
@@ -81,7 +30,7 @@ class Devices extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid p-0">
+      <div className="container p-0">
         <nav className="navbar navbar-light bg-light">
           <span className="navbar-brand mb-0 h1">Intelli-next</span>
           <span className="navbar-text">
@@ -91,10 +40,6 @@ class Devices extends React.Component {
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Load</button>
           </form>
         </nav>
-        <DevicesPanel
-          modules={this.props.modules}
-          isLoading={this.props.isLoading}
-          errMess={this.props.errMess} />
       </div>
     );
   }

@@ -73,7 +73,7 @@ export const fetchAPI = () => (dispatch) => {
     headers: { 'Content-Type': 'application/json' }
   };
 
-  const urlApi = 'https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&media_type=image';
+  const urlApi = 'https://images-api.nasa.gov/search?q=spacex&media_type=image';
 
   return fetch(urlApi, requestOptions)
     .then(response => {
@@ -111,4 +111,9 @@ export const apiFailed = (errMess) => ({
   payload: errMess
 });
 
+//Page
 
+export const togglePage = (page) => ({
+  type: ActionTypes.TOGGLE_PAGE,
+  payload: page
+});

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { addLogin, fetchModules, fetchAPI } from '../redux/ActionCreators';
+import { addLogin, fetchModules, fetchAPI, togglePage } from '../redux/ActionCreators';
 
 
 import Login from './login';
@@ -14,7 +14,8 @@ const mapStateToProps = state => {
     Modules: state.Modules,
     token: state.Auth.token,
     collection: state.Api.collections,
-    Api: state.Api
+    Api: state.Api,
+    page: state.Page.page
   }
 }
 
@@ -22,7 +23,8 @@ const mapDispatchToProps = dispatch => {
   return {
     addLogin: (email, password) => dispatch(addLogin(email, password)),
     fetchModules: (email, password) => dispatch(fetchModules(email, password)),
-    fetchAPI: () => dispatch(fetchAPI())
+    fetchAPI: () => dispatch(fetchAPI()),
+    togglePage: (page) => dispatch(togglePage(page))
   }
 }
 
@@ -52,6 +54,8 @@ class Main extends React.Component {
           token={this.props.token}
           collection={this.props.collection}
           Api={this.props.Api}
+          page={this.props.page}
+          togglePage={this.togglePage}
         /></Route>
         <Redirect to="/login" />
       </Switch>

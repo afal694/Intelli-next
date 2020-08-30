@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { addLogin, fetchModules } from '../redux/ActionCreators';
+import { addLogin, fetchModules, fetchAPI } from '../redux/ActionCreators';
 
 
 import Login from './login';
@@ -12,14 +12,16 @@ const mapStateToProps = state => {
     email: state.email,
     password: state.password,
     Modules: state.Modules,
-    token: state.Auth.token
+    token: state.Auth.token,
+    collection: state.Api
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addLogin: (email, password) => dispatch(addLogin(email, password)),
-    fetchModules: (email, password) => dispatch(fetchModules(email, password))
+    fetchModules: (email, password) => dispatch(fetchModules(email, password)),
+    fetchAPI: () => dispatch(fetchAPI())
   }
 }
 
@@ -29,6 +31,9 @@ class Main extends React.Component {
     super(props);
   }
 
+  componentDidMount(){
+    this.props.fetchAPI();
+  }
 
   render() {
 

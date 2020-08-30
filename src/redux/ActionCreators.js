@@ -9,7 +9,7 @@ export const addLogin = (email, password) => ({
 //modules
 export const fetchModules = (email, password) => (dispatch) => {
 
-  dispatch(modulesLoading);
+  dispatch(modulesLoading());
 
   const requestOptions = {
     method: 'POST',
@@ -55,7 +55,60 @@ export const modulesFailed = (errMess) => ({
   payload: errMess
 });
 
+//token 
+
 export const addToken = (token) => ({
   type: ActionTypes.ADD_TOKEN,
   payload: token
 });
+
+//API
+
+export const fetchAPI = () => (dispatch) => {
+
+  dispatch(apiLoading());
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  };
+
+  const urlApi = 'https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&media_type=image';
+
+  return fetch(urlApi, requestOptions)
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error('Error' + response.status + ':' + response.statusText);
+        error.response = response;
+        throw error;
+      }
+    },
+      error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      })
+    .then(response => response.json())
+    .then(data => {
+      //console.log(data);
+      dispatch(addApi(data));
+    })
+    .catch(error => dispatch(apiFailed(error.message)))
+}
+
+export const addApi = (collections) => ({
+  type: ActionTypes.ADD_API,
+  payload: collections
+});
+
+export const apiLoading = () => ({
+  type: ActionTypes.API_LOADING
+});
+
+export const apiFailed = (errMess) => ({
+  type: ActionTypes.API_FAILED,
+  payload: errMess
+});
+
+

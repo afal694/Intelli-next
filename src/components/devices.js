@@ -70,7 +70,7 @@ function DevicesPanel({ modules, isLoading, errMess }) {
   }
 }
 
-
+//https://images-api.nasa.gov/search?q=apollo%2011&description=moon%20landing&media_type=image
 
 class Devices extends React.Component {
   constructor(props) {
@@ -82,7 +82,7 @@ class Devices extends React.Component {
     const text = event.target.value;
     const SearchRequestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.props.token}` }
+      headers: { 'Content-Type': 'application/json','Authorization':'Bearer '+this.props.token }
     }
     fetch(`https://api.myintelli.net/v1/2/devices?limit=5&offset=0&search=${text}`,SearchRequestOptions)
         .then(response => response.json())

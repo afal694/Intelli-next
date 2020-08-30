@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Login } from "./login";
 import { Modules } from "./modules";
 import { Auth } from "./auth";
+import { Api } from './externApi'
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
@@ -10,7 +11,8 @@ export const ConfigureStore = () => {
 		combineReducers({
 			Login,
 			Modules,
-			Auth
+			Auth,
+			Api
 		}),
 		applyMiddleware(thunk,logger)
 	);

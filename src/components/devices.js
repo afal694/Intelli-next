@@ -30,14 +30,14 @@ class Devices extends React.Component {
 
   render() {
     return (
-      <div className="container p-0">
+      <div className="container-fluid p-0">
         <nav className="navbar navbar-light bg-light">
           <span className="navbar-brand mb-0 h1">Intelli-next</span>
           <span className="navbar-text">
             Navbar text with an inline element</span>
           <form className="form-inline">
             <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onKeyUp={(event) => this.handleKeyUp(event)}/>
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Load</button>
+            <button className="btn btn-outline-success my-2 my-sm-0" type="button">Load</button>
           </form>
         </nav>
       </div>

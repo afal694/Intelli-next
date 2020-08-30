@@ -2,21 +2,25 @@ import React from 'react';
 import Devices from './devices';
 import ExternApi from './externApi';
 import {
-  Form, FormGroup, Label, Input, Button, Card, CardBody,
-  CardTitle, CardSubtitle, Row
+  Card, CardBody,
+  CardTitle, CardSubtitle
 } from 'reactstrap';
 import { Switch, Route, withRouter, Redirect, useRouteMatch, Link } from 'react-router-dom';
 
 function LeftPanel({ modules, isLoading, errMess }) {
 
+  let match = useRouteMatch();
+
   const renderModules = modules.map((modules) => {
 
     return (
       <li className="nav-item" key={modules.id_module} >
-        <a className="nav-link" >
+
+        <Link to={`${match.url}/${modules.module}`} className="nav-link" >
           <span data-feather="home"></span>
-          {modules.module} <span className="sr-only">(current)</span>
-        </a>
+          {modules.module}
+        </Link>
+        <span className="sr-only">(current)</span>
       </li>
     );
   });
@@ -31,7 +35,7 @@ function LeftPanel({ modules, isLoading, errMess }) {
     );
   } else if (errMess) {
     return (
-      <div className="container">
+      <div className="container-fluid ">
         <div className="row">
           <h1>{errMess}</h1>
         </div>
@@ -42,6 +46,14 @@ function LeftPanel({ modules, isLoading, errMess }) {
       <div className="right-panel ">
         <div className="pt-3">
           <ul className="nav flex-column">
+            <li className="nav-item" key="NasaApi" >
+
+              <Link to={`${match.url}/api`} className="nav-link" >
+                <span data-feather="home"></span>
+                Nasa
+              </Link>
+              <span className="sr-only">(current)</span>
+            </li>
             {renderModules}
           </ul>
         </div>
@@ -96,49 +108,27 @@ function DevicesPanel({ modules, isLoading, errMess }) {
   }
 }
 
-function TogglePage(props) {
-
-  switch (props.auxSwitch) {
-    case 'DEVICE':
-      return (
-        <Devices
-          token={props.token}
-        />
-      );
-
-    case 'api':
-      return (
-        <ExternApi
-          Api={props.Api}
-          collection={props.collection}
-        />
-      );
-
-    default:
-      break;
-  }
-}
-
 function SwicthPage(props) {
 
   let match = useRouteMatch();
 
   return (
-    <div className="col-10">
-      <ul>
-        <li>
-          <Link to={`${match.url}/api`}>
-            Props v. State
-          </Link>
-        </li>
-      </ul>
+    <div className="container-fluid p-0">
       <Switch>
-        <Route exact path={match.path} ><Devices token={props.token} /></Route>
-        <Route path={`${match.path}/api`} >
+        <Route exact path={match.path} >
           <ExternApi
             Api={props.Api}
             collection={props.collection} />
         </Route>
+        <Route path={`${match.path}/DEVICE`} >
+          <Devices token={props.token} />
+        </Route>
+        <Route path={`${match.path}/api`}>
+          <ExternApi
+            Api={props.Api}
+            collection={props.collection} />
+        </Route>
+        <Redirect to={match.path} />
       </Switch>
     </div>
 
@@ -155,44 +145,23 @@ class Menu extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col-2 sidebar bg-light">
+        <div className="col-3 sidebar bg-light">
           <LeftPanel
             modules={this.props.modules}
             isLoading={this.props.isLoading}
             errMess={this.props.errMess}
           />
         </div>
-        <SwicthPage
-          token={this.props.token}
-          Api={this.props.Api}
-          collection={this.props.collection}
-        />
-      </div>
+        <div className="col-9 p-0">
+          <SwicthPage
+            token={this.props.token}
+            Api={this.props.Api}
+            collection={this.props.collection}
+          />
+        </div>
+       </div> 
     );
   }
-
-
-  // <DevicesPanel
-  // modules={this.props.modules}
-  // isLoading={this.props.isLoading}
-  // errMess={this.props.errMess} />
-  // render() {
-  //   return (
-  //     <div className="">
-  //       <div className="row">
-  //         <div className="col-2 sidebar bg-light">
-  //           <LeftPanel />
-  //         </div>
-  //         <div className="col-10 p-0">
-  //           <ExternApi
-  //             Api={this.props.Api}
-  //             collection={this.props.collection}
-  //             />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
 }
 

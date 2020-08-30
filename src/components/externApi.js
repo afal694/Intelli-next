@@ -1,29 +1,77 @@
 import React from 'react';
 import {
   Form, FormGroup, Label, Input, Button, Card, CardBody,
-  CardTitle, CardSubtitle, Row, CardImg
+  CardTitle, CardSubtitle, Row, CardImg, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
+
+
+class ModalCard extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isModalOpen: false
+    };
+
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal() {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <Button color="info" onClick={this.toggleModal}>Description</Button>
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>{this.props.title} <p className="font-weight-lighter">{this.props.location}</p></ModalHeader>
+          <ModalBody>
+            <img src={this.props.img} className="img-fluid" alt="img" />
+            <hr />
+            {this.props.description}
+          </ModalBody>
+          <ModalFooter>
+            <p className="font-weight-lighter">{this.props.date}</p>
+            <p className="font-italic">{this.props.photographer}</p>
+          </ModalFooter>
+        </Modal>
+      </div>
+    );
+  }
+
+}
+
 
 function ApiPanel({ collection, isLoading, errMess }) {
 
-  //const items = collection.items;
   const renderItem = collection.map((item) => {
     return (
       <div className="cardModule" key={item.data[0].nasa_id}>
         <Card className="border-primary">
-          <CardImg top width="10%" src={item.links[0].href} alt="Card image cap" />
+          <CardImg top width="5%" src={item.links[0].href} alt="Card image cap" />
           <div className="card-header text-primary">{item.data[0].title}<div className="badge badge-info"></div></div>
           <CardBody>
             <CardTitle></CardTitle>
             <CardSubtitle className="text-info"> location: {item.data[0].location}</CardSubtitle>
+            <hr />
+            <ModalCard
+              description={item.data[0].description}
+              photographer={item.data[0].photographer}
+              title={item.data[0].title}
+              location={item.data[0].location}
+              img={item.links[0].href}
+              date={item.data[0].date_created}
+            />
           </CardBody>
-          <div className="card-footer">
-          </div>
         </Card>
       </div>
     );
   });
-  //Api.collections.collection.items[0].data[0].nasa_id
+
   if (isLoading) {
     return (
       <div className="">
@@ -40,7 +88,7 @@ function ApiPanel({ collection, isLoading, errMess }) {
         </div>
       </div>
     );
-  } else if (collection [0] != null) {
+  } else if (collection[0] != null) {
     return (
       <div className="containerModules">
         {renderItem}

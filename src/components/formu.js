@@ -24,28 +24,30 @@ class Formu extends React.Component {
 
   render() {
     return (
-      <LocalForm
-        onSubmit={(values) => this.handleSubmit(values)}
-      >
-        <FormGroup>
-          <Label htmlFor="email" md={2}>Email</Label>
-          <Control.text model=".email" id="email" name="email" className="form-control" placeholder="Email" />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="password" md={2}>Password</Label>
-          <Control.password model=".password" id="password" name="password" className="form-control" placeholder="Password" />
-        </FormGroup>
-        <Row className="form-group">
-          <Col className="align-items-center">
-            <Button type="submit" color="success">
-              Login
+      <div>
+        <LocalForm
+          onSubmit={(values) => this.handleSubmit(values)}
+        >
+          <FormGroup>
+            <Label htmlFor="email" md={2}>Email</Label>
+            <Control.text model=".email" id="email" name="email" className="form-control" placeholder="Email" />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="password" md={2}>Password</Label>
+            <Control.password model=".password" id="password" name="password" className="form-control" placeholder="Password" />
+          </FormGroup>
+          <Row className="form-group align-items-stretch">
+            <Col className="align-items-stretch">
+              <Button type="submit" color="success">
+                Login
                   </Button>
-          </Col>
-        </Row>
-      </LocalForm>
+            </Col>
+          </Row>
+        </LocalForm>
+      </div>
 
     );
   }
 }
 
-export default  withRouter(Formu);
+export default withRouter(Formu);

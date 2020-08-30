@@ -27,19 +27,46 @@ function LeftPanel({ modules, isLoading, errMess }) {
 
   if (isLoading) {
     return (
-      <div className="">
-        <div className="App d-flex flex-column align-items-center justify-content-center">
-          <p>Loading...</p>
+      <div className="right-panel ">
+        <div className="pt-3">
+          <ul className="nav flex-column">
+            <li className="nav-item" key="NasaApi" >
+
+              <Link to={`${match.url}/api`} className="nav-link" >
+                <span data-feather="home"></span>
+              NASA - SPACEX
+            </Link>
+              <span className="sr-only">(current)</span>
+            </li>
+            <li className="nav-item" >
+              <span data-feather="home"></span>
+                Loading ...
+              <span className="sr-only">(current)</span>
+            </li>
+          </ul>
         </div>
       </div>
     );
   } else if (errMess) {
     return (
-      <div className="container-fluid ">
-        <div className="row">
-          <h1>{errMess}</h1>
+      <div className="right-panel ">
+        <div className="pt-3">
+          <ul className="nav flex-column">
+            <li className="nav-item" key="NasaApi" >
+
+              <Link to={`${match.url}/api`} className="nav-link" >
+                <span data-feather="home"></span>
+              NASA - SPACEX
+            </Link>
+              <span className="sr-only">(current)</span>
+            </li>
+            <li>
+              <h1>{errMess}</h1>
+            </li>
+          </ul>
         </div>
       </div>
+
     );
   } else if (modules[0] != null) {
     return (
@@ -50,7 +77,7 @@ function LeftPanel({ modules, isLoading, errMess }) {
 
               <Link to={`${match.url}/api`} className="nav-link" >
                 <span data-feather="home"></span>
-                Nasa
+                NASA - SPACEX
               </Link>
               <span className="sr-only">(current)</span>
             </li>
@@ -79,7 +106,7 @@ function SwicthPage(props) {
             collection={props.collection} />
         </Route>
         <Route path={`${match.path}/DEVICE`} >
-          <Devices token={props.token} 
+          <Devices token={props.token}
             module={props.modules[11]}
             isLoading={props.isLoading}
             errMess={props.errMess}
@@ -90,7 +117,12 @@ function SwicthPage(props) {
             Api={props.Api}
             collection={props.collection} />
         </Route>
-        <Redirect to={match.path} />
+        <Route path={`${match.path}/construccion`}>
+          <div className="justify-content-center text-center text-white">
+            <h4>EN CONSTRUCCIÓN</h4>
+          </div>
+        </Route>
+        <Redirect to={`${match.path}/construccion`} />
       </Switch>
     </div>
 
@@ -107,14 +139,14 @@ class Menu extends React.Component {
   render() {
     return (
       <div className="row">
-        <div className="col-3 sidebar bg-light scroll-bar">
+        <div className="col-md-4 col-lg-3 sidebar bg-light scroll-bar">
           <LeftPanel
             modules={this.props.modules}
             isLoading={this.props.isLoading}
             errMess={this.props.errMess}
           />
         </div>
-        <div className="col-9 p-0 scroll-bar">
+        <div className="col-md-8 col-lg-9 p-0 scroll-bar">
           <SwicthPage
             token={this.props.token}
             Api={this.props.Api}
@@ -124,7 +156,7 @@ class Menu extends React.Component {
             errMess={this.props.errMess}
           />
         </div>
-       </div> 
+      </div>
     );
   }
 

@@ -57,22 +57,21 @@ class Devices extends React.Component {
     const text = event.target.value;
     const SearchRequestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + this.props.token }
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer  ${this.props.token}` }
     }
     fetch(`https://api.myintelli.net/v1/2/devices?limit=5&offset=0&search=${text}`, SearchRequestOptions)
       .then(response => response.json())
       .then(data => {
         console.log(data);
       })
-    // setTimeout(() => {
-    //   console.log("Key Up");
-    //   fetch(`https://api.myintelli.net/v1/2/devices?limit=5&offset=0&search=ave`,SearchRequestOptions)
+    // setTimeout((text) => {
+    //   fetch(`https://api.myintelli.net/v1/2/devices?limit=5&offset=0&search=${text}`,SearchRequestOptions)
     //     .then(response => response.json())
     //     .then(data => {
     //       console.log(data);
     //     })
-    //     console.log(JSON.stringify(event.target.value));  
-    // }, 1000);
+    // }, 1000); 
+
   }
 
   render() {

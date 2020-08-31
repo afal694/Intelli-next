@@ -11,18 +11,39 @@ function LeftPanel({ modules, isLoading, errMess }) {
 
   let match = useRouteMatch();
 
-  const renderModules = modules.map((modules) => {
+  const SideBarUp = modules.map((modules) => {
 
-    return (
-      <li className="nav-item" key={modules.id_module} >
+    if (modules.path.slice(0, 2) === "1.") {
+      if(modules.setting_module_config.position==="SIDEBAR-DOWN"){
+        return (
+          <li className="nav-item" key={modules.id_module} >
+          <Link to={`${match.url}/${modules.module}`} className="nav-link" >
+            <span data-feather="home"></span>
+            {modules.module}
+          </Link>
+          <span className="sr-only">(current)</span>
+        </li>
+        );
+      }
+    }
 
-        <Link to={`${match.url}/${modules.module}`} className="nav-link" >
-          <span data-feather="home"></span>
-          {modules.module}
-        </Link>
-        <span className="sr-only">(current)</span>
-      </li>
-    );
+  });
+
+  const SideBarDown = modules.map((modules) => {
+
+    if(modules.path.slice(0, 2) === "1."){
+      if(modules.setting_module_config.position==="SIDEBAR-DOWN"){
+        return (
+          <li className="nav-item" key={modules.id_module} >
+          <Link to={`${match.url}/${modules.module}`} className="nav-link" >
+            <span data-feather="home"></span>
+            {modules.module}
+          </Link>
+          <span className="sr-only">(current)</span>
+        </li>
+        );
+      }
+    }
   });
 
   if (isLoading) {
@@ -73,15 +94,11 @@ function LeftPanel({ modules, isLoading, errMess }) {
       <div className="right-panel ">
         <div className="pt-3">
           <ul className="nav flex-column">
-            <li className="nav-item" key="NasaApi" >
-
-              <Link to={`${match.url}/api`} className="nav-link" >
-                <span data-feather="home"></span>
-                NASA - SPACEX
-              </Link>
-              <span className="sr-only">(current)</span>
-            </li>
-            {renderModules}
+            {SideBarUp}
+          </ul>
+          <hr />
+          <ul className="nav flex-column">
+            {SideBarDown}
           </ul>
         </div>
       </div>
@@ -91,6 +108,14 @@ function LeftPanel({ modules, isLoading, errMess }) {
   }
 
 }
+
+// <li className="nav-item" key="NasaApi" >
+// <Link to={`${match.url}/api`} className="nav-link" >
+//   <span data-feather="home"></span>
+//   NASA - SPACEX
+// </Link>
+// <span className="sr-only">(current)</span>
+// </li>
 
 
 function SwicthPage(props) {

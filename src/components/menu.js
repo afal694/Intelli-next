@@ -5,7 +5,7 @@ import {
   Card, CardBody,
   CardTitle, CardSubtitle, Nav, NavItem, NavLink
 } from 'reactstrap';
-import { Switch, Route, withRouter, Redirect, useRouteMatch, Link} from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect, useRouteMatch, Link } from 'react-router-dom';
 
 
 const separar = (module) => {
@@ -31,6 +31,7 @@ function Config({ ConfigItem }) {
 
   return <div>{renderItem}</div>
 }
+
 
 function SideBarUp({ SideBarUpItems }) {
 
@@ -102,7 +103,7 @@ function LeftPanel({ modules, isLoading, errMess }) {
   let HeaderItem = null;
 
   modules.map((module) => {
-    if (module.path.slice(0, 2) === "1." || module.path === "1") {
+    if (module.path.slice(0, 2) === "1.") {
       if (module.setting_module_config.position === "SIDEBAR-UP") {
         SideBarUpItems.push(module);
       }
@@ -112,9 +113,12 @@ function LeftPanel({ modules, isLoading, errMess }) {
       if (module.setting_module_config.position === "CONFIGURACION-MENU") {
         ConfiguracionItems.push(module);
       }
-      if (module.setting_module_config.position === "HEADER") {
-        HeaderItem = (module);
+      if(module.module==="CONFIGURATION"){
+         ConfigItem.push(module);
       }
+    }
+    if (module.path === "1") {
+      HeaderItem = (module);
     }
   });
 
@@ -202,14 +206,6 @@ function LeftPanel({ modules, isLoading, errMess }) {
   }
 
 }
-
-// <li className="nav-item" key="NasaApi" >
-// <Link to={`${match.url}/api`} className="nav-link" >
-//   <span data-feather="home"></span>
-//   NASA - SPACEX
-// </Link>
-// <span className="sr-only">(current)</span>
-// </li>
 
 
 function SwicthPage(props) {

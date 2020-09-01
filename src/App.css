@@ -87,10 +87,6 @@ sidebar
     /* Full width */
 }
 
-.nav-item :hover {
-    background-color: darkgray;
-}
-
 
 /* devices */
 
@@ -116,4 +112,8 @@ sidebar
 
 .ul-conf {
     display: flex;
+}
+
+li:hover {
+    background-color: lightgray;
 }

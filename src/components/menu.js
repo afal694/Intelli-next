@@ -3,48 +3,128 @@ import Devices from './devices';
 import ExternApi from './externApi';
 import {
   Card, CardBody,
-  CardTitle, CardSubtitle
+  CardTitle, CardSubtitle, Nav, NavItem, NavLink
 } from 'reactstrap';
-import { Switch, Route, withRouter, Redirect, useRouteMatch, Link } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect, useRouteMatch, Link} from 'react-router-dom';
+
+
+const separar = (module) => {
+  let words = module.module.split('_');
+  return words.join(' ');
+}
+
+function Config({ ConfigItem }) {
+
+  let match = useRouteMatch();
+
+  const renderItem = ConfigItem.map((modules) => {
+    return (
+      <li className="nav-item" key={modules.id_module} >
+        <Link to={`${match.url}/${modules.module}`} className="nav-link" >
+          <span data-feather="home"></span>
+          {modules.module}
+        </Link>
+        <span className="sr-only">(current)</span>
+      </li>
+    );
+  });
+
+  return <div>{renderItem}</div>
+}
+
+function SideBarUp({ SideBarUpItems }) {
+
+  let match = useRouteMatch();
+
+  const renderItem = SideBarUpItems.map((module) => {
+    return (
+      <li className="nav-item" key={module.id_module} >
+        <Link to={`${match.url}/${module.module}`} className="nav-link" >
+          <span data-feather="home"></span>
+          {separar(module)}
+        </Link>
+        <span className="sr-only">(current)</span>
+      </li>
+    );
+  });
+
+  return <div>{renderItem}</div>
+}
+
+
+function SideBarDown({ SideBarDownItems }) {
+
+  let match = useRouteMatch();
+
+  const renderItem = SideBarDownItems.map((module) => {
+
+
+    return (
+      <li className="nav-item" key={module.id_module} >
+        <Link to={`${match.url}/${module.module}`} className="nav-link" >
+          <span data-feather="home"></span>
+          {separar(module)}
+        </Link>
+        <span className="sr-only">(current)</span>
+      </li>
+    );
+  });
+
+  return <div>{renderItem}</div>
+}
+
+function ConfiguracionMenu({ ConfiguracionItems }) {
+
+  let match = useRouteMatch();
+
+  const renderItem = ConfiguracionItems.map((modules) => {
+    return (
+      <li className="nav-item" key={modules.id_module} >
+        <Link to={`${match.url}/${modules.module}`} className="nav-link" >
+          <span data-feather="home"></span>
+          {separar(modules)}
+        </Link>
+        <span className="sr-only">(current)</span>
+      </li>
+    );
+  });
+
+  return <div>{renderItem}</div>
+}
 
 function LeftPanel({ modules, isLoading, errMess }) {
 
   let match = useRouteMatch();
+  let SideBarUpItems = [];
+  let SideBarDownItems = [];
+  let ConfiguracionItems = [];
+  let ConfigItem = [];
+  let HeaderItem = null;
 
-  const SideBarUp = modules.map((modules) => {
-
-    if (modules.path.slice(0, 2) === "1.") {
-      if(modules.setting_module_config.position==="SIDEBAR-DOWN"){
-        return (
-          <li className="nav-item" key={modules.id_module} >
-          <Link to={`${match.url}/${modules.module}`} className="nav-link" >
-            <span data-feather="home"></span>
-            {modules.module}
-          </Link>
-          <span className="sr-only">(current)</span>
-        </li>
-        );
+  modules.map((module) => {
+    if (module.path.slice(0, 2) === "1." || module.path === "1") {
+      if (module.setting_module_config.position === "SIDEBAR-UP") {
+        SideBarUpItems.push(module);
       }
-    }
-
-  });
-
-  const SideBarDown = modules.map((modules) => {
-
-    if(modules.path.slice(0, 2) === "1."){
-      if(modules.setting_module_config.position==="SIDEBAR-DOWN"){
-        return (
-          <li className="nav-item" key={modules.id_module} >
-          <Link to={`${match.url}/${modules.module}`} className="nav-link" >
-            <span data-feather="home"></span>
-            {modules.module}
-          </Link>
-          <span className="sr-only">(current)</span>
-        </li>
-        );
+      if (module.setting_module_config.position === "SIDEBAR-DOWN" && module.path !== "1.5") {
+        SideBarDownItems.push(module);
+      }
+      if (module.setting_module_config.position === "CONFIGURACION-MENU") {
+        ConfiguracionItems.push(module);
+      }
+      if (module.setting_module_config.position === "HEADER") {
+        HeaderItem = (module);
       }
     }
   });
+
+  function RenderHeader({ HeaderItem }) {
+    return (
+      <div className="nav">
+        {HeaderItem.module}
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -93,13 +173,27 @@ function LeftPanel({ modules, isLoading, errMess }) {
     return (
       <div className="right-panel ">
         <div className="pt-3">
+          <Nav Vertical>
+            <NavItem>
+              <NavLink href="#"><RenderHeader HeaderItem={HeaderItem} /></NavLink>
+            </NavItem>
+          </Nav>
+          <hr />
           <ul className="nav flex-column">
-            {SideBarUp}
+            <SideBarUp SideBarUpItems={SideBarUpItems} />
           </ul>
           <hr />
           <ul className="nav flex-column">
-            {SideBarDown}
+            <SideBarDown SideBarDownItems={SideBarDownItems} />
+            <li className="nav-item" key={ConfigItem.id_module} >
+              <Config ConfigItem={ConfigItem} />
+              <span className="sr-only">(current)</span>
+              <ul className="ul-conf">
+                <ConfiguracionMenu ConfiguracionItems={ConfiguracionItems} />
+              </ul>
+            </li>
           </ul>
+          <hr />
         </div>
       </div>
     );
